@@ -238,7 +238,7 @@ async def stop(ctx):
 def Alerts():
     time.sleep(1)
     print(colored(f'\nPokétwo Autocacther.\n\nsò mitada violenta.', 'black', 'on_light_cyan')) 
-    print(colored(f'Versao: {version} TERMUX', 'black', 'on_white')) 
+    print(colored(f'Versao: {version} || TERMUX', 'black', 'on_white')) 
     print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow')) 
     
 
