@@ -21,14 +21,14 @@ from threading import Thread
 
 
 Arquivos = {
-    'main.py': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/mainauto3chat-termux.py',
-    'bot.py': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/auto3chat-termux.py',
-    'data/pokemon': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/pokemon.txt',
-    'data/legendary': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/data/legendary',
-    'data/mythical': 'https://raw.githubusercontent.com/Kameil/arquivos-para-eu-da-uns-request-tendeu/main/data/mythical'
+    'main.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/main.py',
+    'bot.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py',
+    'data/pokemon': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/pokemon',
+    'data/legendary': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/legendary',
+    'data/mythical': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/mythical'
     }
 
-version = '2.4 otmz'
+version = '2.5 files'
 headers = {
     'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36'
 }
@@ -220,7 +220,7 @@ async def start(ctx):
                 await ctx.send('Bot Iniciado.')
 
 @client.command()
-async def stop(ctx: commands.Context):
+async def stop(ctx):
     global paused
     if str(ctx.channel.id) in catch_ids:
         async with ctx.typing():
@@ -235,25 +235,12 @@ async def stop(ctx: commands.Context):
 
       
 
-def Alerts(): 
+def Alerts():
+    time.sleep(1)
     print(colored(f'\nPokétwo Autocacther.\n\nsò mitada violenta.', 'black', 'on_light_cyan')) 
     print(colored(f'Versao: {version} TERMUX', 'black', 'on_white')) 
     print(colored(f'o prefix do autocatch é "{prefix}".\n\nuse {prefix}ajuda para ver a lista de comandos.', 'yellow')) 
     
-def SearchMain():
-    time.sleep(5)
-    print("Recarregando main.py...")
-    response = requests.get(Arquivos['main.py'])
-    if response.status_code == 200:
-        if str(open("main.py", "r", encoding='utf8').read()) == str(response.text.encode('utf-8')):
-            print ("nenhuma atualizaçao encontrada.")
-        else:
-            print('main.py Recarregado.')
-        with open("main.py", "w") as file:
-            file.write(response.text)
-    else:
-        print(f'Nao Foi possivel Recarrega o main.py. codigo de status: {response.status_code}')
-
 
 def ProcurarAtualizaçoes():
     while True:
@@ -266,7 +253,6 @@ def ProcurarAtualizaçoes():
         time.sleep(600)
 
 
-Thread(target=SearchMain).start()
 Thread(target=Alerts).start()
 Thread(target=ProcurarAtualizaçoes).start()
 try:
