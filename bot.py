@@ -113,8 +113,8 @@ async def on_ready():
             await channel.send(random.choice(pro))
         else:
             print(colored(f"Nao foi possivel obter o canal: {catch_id}!", "red"))
-    except:
-        print(colored("Ocorreu um erro!", "red"))
+    except Exception as e:
+        print(colored(f"Ocorreu um erro: {e}", "red"))
 
 
 def remover_emojis(texto): 
