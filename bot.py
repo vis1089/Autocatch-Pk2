@@ -1,12 +1,8 @@
 import discord
 import subprocess as sb
 import time
-if discord.__version__ == '1.9.2':
-    print('Atualizando discord.')
-    time.sleep(1)
-    sb.run(['pip', 'install', 'discord.py-self==2.0.0'])
-    sb.run(['python3', 'main.py'])
-    exit()
+if discord.__version__ != '2.0.0':
+    print('Voce esta utilizando um discord.py-self desatualizado.')
 import re
 import os
 import asyncio
