@@ -13,7 +13,7 @@ def download_file(url, file_name):
     print('Procurando atualizações...')
     response = requests.get(url)
     if response.status_code == 200:
-        with open(file_name, "w") as file:
+        with open(file_name, "w", encoding="utf-8") as file:
             file.write(response.text)
         return True
     return False
