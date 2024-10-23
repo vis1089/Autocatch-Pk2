@@ -137,7 +137,7 @@ async def on_message(message : discord.message):
             if message.embeds:
                 embed_title = message.embeds[0].title
                 if 'wild pokémon has appeared!' in embed_title:
-                    timesleep = random.uniform(1.5, 3.5)
+                    timesleep = random.uniform(0.5, 1.0)
                     await asyncio.sleep(0)
                     if not paused:
                         await asyncio.sleep(timesleep)
@@ -149,7 +149,7 @@ async def on_message(message : discord.message):
                         print('Pokemon not found.')
                     else:
                         for i in solve(content):
-                            timesleep = random.uniform(0.8, 2.3)
+                            timesleep = random.uniform(0.8, 1.3)
                             if not paused:
                                 pokemon_name = limpar_texto(i.lower())
                                 await asyncio.sleep(timesleep)
@@ -158,7 +158,7 @@ async def on_message(message : discord.message):
                                 if captcha:
                                     await asyncio.sleep(random.uniform(0.5,1.5))
                                     
-                                    await asyncio.sleep(random.uniform(0.5, 4.5))
+                                    await asyncio.sleep(random.uniform(0.5, 1.5))
                                     await message.channel.send(f"autocatch esta pausado pois o Bot detectou um captcha\n{captcha_content}")
                 elif 'Congratulations' in content:
                     global shiny
@@ -185,7 +185,7 @@ async def on_message(message : discord.message):
                 elif 'human' in content:
                     paused = True
                     
-                    await asyncio.sleep(random.uniform(0.5,3.5))
+                    await asyncio.sleep(random.uniform(0.5,1.5))
                     await message.channel.send(f'<@{ping}> Captcha Detectado! Bot pausado.')
                     captcha_content = message.content
                     captcha =True
