@@ -152,14 +152,13 @@ async def on_message(message : discord.message):
                         for i in solve(content):
                             timesleep = random.uniform(0.8, 2.3)
                             if not paused:
-                                await message.channel.trigger_typing()
                                 pokemon_name = limpar_texto(i.lower())
                                 await asyncio.sleep(timesleep)
                                 await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
                             else:
                                 if captcha:
                                     await asyncio.sleep(random.uniform(0.5,1.5))
-                                    await message.channel.trigger_typing()
+                                    
                                     await asyncio.sleep(random.uniform(0.5, 4.5))
                                     await message.channel.send(f"autocatch esta pausado pois o Bot detectou um captcha\n{captcha_content}")
                 elif 'Congratulations' in content:
@@ -186,7 +185,7 @@ async def on_message(message : discord.message):
                         print(f'Total Pokémon Caught: {num_pokemon} :{pokemon}')
                 elif 'human' in content:
                     paused = True
-                    await message.channel.trigger_typing()
+                    
                     await asyncio.sleep(random.uniform(0.5,3.5))
                     await message.channel.send(f'<@{ping}> Captcha Detectado! Bot pausado.')
                     captcha_content = message.content
@@ -206,25 +205,23 @@ async def say(ctx, *, args):
 async def start(ctx):
     global paused
     if str(ctx.channel.id) in catch_ids:
-        async with ctx.trigger_typing():
-            await asyncio.sleep(random.uniform(0.5, 0.9))
-            if not paused:
-                await ctx.send('Bot ja esta em Execuçao.')
-            else:
-                paused = False
-                await ctx.send('Bot Iniciado.')
+        await asyncio.sleep(random.uniform(0.5, 0.9))
+        if not paused:
+            await ctx.send('Bot ja esta em Execuçao.')
+        else:
+            paused = False
+            await ctx.send('Bot Iniciado.')
 
 @client.command()
 async def stop(ctx):
     global paused
     if str(ctx.channel.id) in catch_ids:
-        async with ctx.trigger_typing():
-            await asyncio.sleep(random.uniform(0.5, 0.9))
-            if not paused:
-                paused = True
-                await ctx.send('Bot Pausado.')
-            else:
-                await ctx.send('Bot Ja esta pausado.')
+        await asyncio.sleep(random.uniform(0.5, 0.9))
+        if not paused:
+            paused = True
+            await ctx.send('Bot Pausado.')
+        else:
+            await ctx.send('Bot Ja esta pausado.')
       
 
 
@@ -239,6 +236,7 @@ def Alerts():
 
 def ProcurarAtualizaçoes():
     requisicoes = 1
+    time.sleep(60)
     while True:
         for file, url in Arquivos.items():
             print(f'{requisicoes} - (GET)[{url}]')
