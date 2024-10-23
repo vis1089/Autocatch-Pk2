@@ -68,13 +68,13 @@ Thread(target=CarregarPokemons).start()
 
 
 
-seras = 0
+seras = 5
 
 def decidirtimesleep():
     global seras
     if seras == 0:
-        seras = 5
-        return 4.5
+        seras = 3
+        return 5
     else:
         seras = 0
         return 0
