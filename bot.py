@@ -71,13 +71,7 @@ Thread(target=CarregarPokemons).start()
 seras = 5
 
 def decidirtimesleep():
-    global seras
-    if seras == 0:
-        seras = 3
-        return 5
-    else:
-        seras = 0
-        return 0
+    return 0
 
 with open('data/legendary', 'r') as file:
     legendary_list = file.read()
