@@ -25,7 +25,7 @@ local_file_name = "bot.py"
 if download_file(github_url, local_file_name):
     try:
         if __name__ == '__main__':
-                subprocess.run(["python3", local_file_name], check=True)
+                subprocess.run(["python", local_file_name], check=True)
     except subprocess.CalledProcessError as e:
         print(colored('Erro ao executar o arquivo.', "red"), colored(' Entre em contato com o discord', 'yellow'), f'\n{str(e)}')
       
