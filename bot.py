@@ -24,7 +24,7 @@ Arquivos = {
     'data/mythical': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/mythical'
     }
 
-version = '2.6 windows/bugsresolvidos'
+version = '2.7 windows/bugsresolvidos'
 headers = {
     'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36'
 }
@@ -66,6 +66,18 @@ def CarregarPokemons():
 
 Thread(target=CarregarPokemons).start()
 
+
+
+seras = 0
+
+def decidirtimesleep():
+    global seras
+    if seras == 0:
+        seras = 5
+        return 4.5
+    else:
+        seras = 0
+        return 0
 
 with open('data/legendary', 'r') as file:
     legendary_list = file.read()
@@ -137,10 +149,10 @@ async def on_message(message : discord.message):
             if message.embeds:
                 embed_title = message.embeds[0].title
                 if 'wild pokémon has appeared!' in embed_title:
-                    timesleep = random.uniform(0.1, 0.2)
+                    timesleep = random.uniform(1.5, 3.5)
                     await asyncio.sleep(0)
                     if not paused:
-                        
+                        await asyncio.sleep(decidirtimesleep())
                         await message.channel.send('<@716390085896962058> h')
             else:
                 content = message.content
@@ -149,7 +161,7 @@ async def on_message(message : discord.message):
                         print('Pokemon not found.')
                     else:
                         for i in solve(content):
-                            timesleep = random.uniform(0.8, 1.3)
+                            timesleep = random.uniform(0.8, 2.3)
                             if not paused:
                                 pokemon_name = limpar_texto(i.lower())
                                 await asyncio.sleep(timesleep)
@@ -158,7 +170,7 @@ async def on_message(message : discord.message):
                                 if captcha:
                                     await asyncio.sleep(random.uniform(0.5,1.5))
                                     
-                                    await asyncio.sleep(random.uniform(0.5, 1.5))
+                                    await asyncio.sleep(random.uniform(0.5, 4.5))
                                     await message.channel.send(f"autocatch esta pausado pois o Bot detectou um captcha\n{captcha_content}")
                 elif 'Congratulations' in content:
                     global shiny
@@ -185,7 +197,7 @@ async def on_message(message : discord.message):
                 elif 'human' in content:
                     paused = True
                     
-                    await asyncio.sleep(random.uniform(0.5,1.5))
+                    await asyncio.sleep(random.uniform(0.5,3.5))
                     await message.channel.send(f'<@{ping}> Captcha Detectado! Bot pausado.')
                     captcha_content = message.content
                     captcha =True
