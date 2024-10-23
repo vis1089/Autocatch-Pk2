@@ -103,7 +103,6 @@ async def on_ready():
     try:
         channel = client.get_channel(int(catch_ids[0]))
         if channel:
-            await channel.trigger_typing()
             await asyncio.sleep(2)
             pro = ["autocatch online.", "ac online", "ac on", "autocatch on"]
             await channel.send(random.choice(pro))
