@@ -140,7 +140,7 @@ async def on_message(message : discord.message):
                     timesleep = random.uniform(0.1, 0.2)
                     await asyncio.sleep(0)
                     if not paused:
-                        await asyncio.sleep(timesleep)
+                        
                         await message.channel.send('<@716390085896962058> h')
             else:
                 content = message.content
