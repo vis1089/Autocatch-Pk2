@@ -137,7 +137,7 @@ async def on_message(message : discord.message):
             if message.embeds:
                 embed_title = message.embeds[0].title
                 if 'wild pokémon has appeared!' in embed_title:
-                    timesleep = random.uniform(1.5, 7.5)
+                    timesleep = random.uniform(1.5, 3.5)
                     await asyncio.sleep(0)
                     if not paused:
                         await asyncio.sleep(timesleep)
