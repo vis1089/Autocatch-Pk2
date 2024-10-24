@@ -1,47 +1,27 @@
-import discord
-import subprocess as sb
-import time
-if discord.__version__ != '2.0.0':
-    print('Voce esta utilizando um discord.py-self desatualizado.')
-import re
-import os
-import asyncio
-import random 
-import string
-import requests
+import discord, time, re, asyncio, random, requests
+time, re, asyncio, random, requests
 from discord.ext import commands
 from termcolor import colored
 from unidecode import unidecode
-from multiprocessing import Process
 from threading import Thread
 
-
 Arquivos = {
-    'main.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/main.py',
-    'bot.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py',
-    'data/pokemon': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/pokemon',
-    'data/legendary': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/legendary',
-    'data/mythical': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/mythical'
+    'main.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/main.py', 'bot.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py', 'data/pokemon': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/pokemon', 'data/legendary': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/legendary', 'data/mythical': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/mythical'
     }
 
-version = '2.7 windows/bugsresolvidos'
+version = '2.8 codigo otmizado'
 headers = {
     'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36'
 }
 
+# bota os CATCH ID AI TA LIGADO PQ OREA SECA E DESENROLADO
+
 catch_ids = []
 
-from config import user_token
-from config import catch_id
-from config import prefix
-from config import ping
-from config import catch_id2, catch_id3, catch_id4, catch_id5, catch_id6
-catch_ids.append(str(catch_id))
-catch_ids.append(str(catch_id2))
-catch_ids.append(str(catch_id3))
-catch_ids.append(str(catch_id4))
-catch_ids.append(str(catch_id5))
-catch_ids.append(str(catch_id6))
+from config import *
+
+for catch_id in [catch_id, catch_id2, catch_id3, catch_id4, catch_id5, catch_id6]:
+    catch_ids.append(catch_id)
 
 catch_ids = [catch_id for catch_id in catch_ids if catch_id != '']
 with open('data/pokemon', 'r', encoding='utf8') as file:
@@ -68,7 +48,6 @@ Thread(target=CarregarPokemons).start()
 
 
 
-seras = 5
 
 def decidirtimesleep():
     return 0
@@ -87,6 +66,7 @@ mythical = 0
 captcha_content = None
 captcha = False
 poketwo = 716390085896962058
+Mpoketwo = "<@" + str(poketwo) + ">"
 client = commands.Bot(command_prefix=[f"{prefix} ", f"{prefix}"], help_command=None)
 def solve(message):
     hint = []
@@ -135,66 +115,57 @@ def limpar_texto(texto):
     return texto_sem_acentos
 
 @client.event
-async def on_message(message : discord.message):
-    global paused
-    global captcha_content
+async def on_message(message : discord.Message):
+    global paused, captcha_content, captcha
     if str(message.channel.id) in catch_ids:
         if message.author.id == poketwo:
-            if message.embeds:
-                embed_title = message.embeds[0].title
-                if 'wild pokémon has appeared!' in embed_title:
-                    timesleep = random.uniform(1.5, 3.5)
-                    await asyncio.sleep(0)
-                    if not paused:
-                        await asyncio.sleep(decidirtimesleep())
-                        await message.channel.send('<@716390085896962058> h')
-            else:
-                content = message.content
-                if 'The pokémon is ' in content:
-                    if not len(solve(content)):
-                        print('Pokemon not found.')
-                    else:
-                        for i in solve(content):
-                            timesleep = random.uniform(0.8, 2.3)
-                            if not paused:
+            if not paused:
+                if message.embeds:
+                    embed_title = message.embeds[0].title
+                    if 'wild pokémon has appeared!' in embed_title:
+                        async with message.channel.typing():
+                            await asyncio.sleep(random.uniform(0.5, 1.4))
+                            await message.channel.send(f'{Mpoketwo} h')
+                else:
+                    content = message.content
+                    if 'The pokémon is ' in content:
+                        if not len(solve(content)):
+                            print('Pokemon not found.')
+                        else:
+                            for i in solve(content):
+                                timesleep = random.uniform(0.8, 2.3)
                                 pokemon_name = limpar_texto(i.lower())
                                 await asyncio.sleep(timesleep)
-                                await message.channel.send(f'<@716390085896962058> c {pokemon_name}')
-                            else:
-                                if captcha:
-                                    await asyncio.sleep(random.uniform(0.5,1.5))
-                                    
-                                    await asyncio.sleep(random.uniform(0.5, 4.5))
-                                    await message.channel.send(f"autocatch esta pausado pois o Bot detectou um captcha\n{captcha_content}")
-                elif 'Congratulations' in content:
-                    global shiny
-                    global legendary
-                    global num_pokemon
-                    global mythical
-                    num_pokemon += 1
-                    split = content.split(' ')
-                    pokemon = split[7].replace('!', '')
-                    if 'seem unusual...' in content:
-                        shiny += 1
-                        print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
-                        print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
-                    elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE):
-                        legendary += 1
-                        print(f'Legendary Pokémon caught! Pokémon: {pokemon}')
-                        print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
-                    elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE):
-                        mythical += 1
-                        print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
-                        print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
-                    else:
-                        print(f'Total Pokémon Caught: {num_pokemon} :{pokemon}')
-                elif 'human' in content:
-                    paused = True
-                    
-                    await asyncio.sleep(random.uniform(0.5,3.5))
-                    await message.channel.send(f'<@{ping}> Captcha Detectado! Bot pausado.')
-                    captcha_content = message.content
-                    captcha =True
+                                await message.channel.send(f'{Mpoketwo} c {pokemon_name}')
+                    elif 'Congratulations' in content:
+                        global shiny
+                        global legendary
+                        global num_pokemon
+                        global mythical
+                        num_pokemon += 1
+                        split = content.split(' ')
+                        pokemon = split[7].replace('!', '')
+                        if 'seem unusual...' in content:
+                            shiny += 1
+                            print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
+                            print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
+                        elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE):
+                            legendary += 1
+                            print(f'Legendary Pokémon caught! Pokémon: {pokemon}')
+                            print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
+                        elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE):
+                            mythical += 1
+                            print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
+                            print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
+                        else:
+                            print(f'Total Pokémon Caught: {num_pokemon} :{pokemon}')
+                    elif 'human' in content:
+                        paused, captcha = True
+                        captcha_content = message.content
+                        
+                        await asyncio.sleep(random.uniform(0.5,3.5))
+                        await message.channel.send(f'<@{ping}> Captcha Detectado! Bot pausado.')
+                        
     if not message.author.bot:
         await client.process_commands(message)
   
@@ -209,24 +180,26 @@ async def say(ctx, *, args):
 @client.command()
 async def start(ctx):
     global paused
-    if str(ctx.channel.id) in catch_ids:
-        await asyncio.sleep(random.uniform(0.5, 0.9))
-        if not paused:
-            await ctx.send('Bot ja esta em Execuçao.')
-        else:
-            paused = False
-            await ctx.send('Bot Iniciado.')
+    async with ctx.typing():
+        if str(ctx.channel.id) in catch_ids:
+            await asyncio.sleep(random.uniform(0.5, 0.9))
+            if not paused:
+                await ctx.send('Bot ja esta em Execuçao.')
+            else:
+                paused = False
+                await ctx.send('Bot Iniciado.')
 
 @client.command()
 async def stop(ctx):
     global paused
-    if str(ctx.channel.id) in catch_ids:
-        await asyncio.sleep(random.uniform(0.5, 0.9))
-        if not paused:
-            paused = True
-            await ctx.send('Bot Pausado.')
-        else:
-            await ctx.send('Bot Ja esta pausado.')
+    async with ctx.typing():
+        if str(ctx.channel.id) in catch_ids:
+            await asyncio.sleep(random.uniform(0.5, 0.9))
+            if not paused:
+                paused = True
+                await ctx.send('Bot Pausado.')
+            else:
+                await ctx.send('Bot Ja esta pausado.')
       
 
 
