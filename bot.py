@@ -133,10 +133,11 @@ async def on_message(message : discord.Message):
                             print('Pokemon not found.')
                         else:
                             for i in solve(content):
-                                timesleep = random.uniform(0.8, 2.3)
-                                pokemon_name = limpar_texto(i.lower())
-                                await asyncio.sleep(timesleep)
-                                await message.channel.send(f'{Mpoketwo} c {pokemon_name}')
+                                async with message.channel.typing():
+                                    timesleep = random.uniform(0.8, 2.3)
+                                    pokemon_name = limpar_texto(i.lower())
+                                    await asyncio.sleep(timesleep)
+                                    await message.channel.send(f'{Mpoketwo} c {pokemon_name}')
                     elif 'Congratulations' in content:
                         global shiny
                         global legendary
@@ -160,11 +161,11 @@ async def on_message(message : discord.Message):
                         else:
                             print(f'Total Pokémon Caught: {num_pokemon} :{pokemon}')
                     elif 'human' in content:
-                        paused, captcha = True
+                        paused, captcha = True, True
                         captcha_content = message.content
-                        
-                        await asyncio.sleep(random.uniform(0.5,3.5))
-                        await message.channel.send(f'<@{ping}> Captcha Detectado! Bot pausado.')
+                        async with message.channel.typing():
+                            await asyncio.sleep(random.uniform(0.5,3.5))
+                            await message.channel.send(f'<@{ping}> Captcha Detectado! Bot pausado.')
                         
     if not message.author.bot:
         await client.process_commands(message)
