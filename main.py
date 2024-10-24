@@ -1,33 +1,18 @@
-import requests
-import subprocess
-import os
-from termcolor import colored
+#bot.py url
+boturl = "https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py"
 
-class DownloadError(Exception):
-    def __init__(self, message, linha):
-        super().__init__(message)
-        self.linha = linha
+import requests, subprocess
 
 
-def download_file(url, file_name):
-    print('Procurando atualizações...')
-    response = requests.get(url)
-    if response.status_code == 200:
-        with open(file_name, "w", encoding="utf-8") as file:
-            file.write(response.text)
-        return True
-    return False
-
-github_url = "https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py"
-local_file_name = "bot.py" 
-
-
-if download_file(github_url, local_file_name):
-    try:
-        if __name__ == '__main__':
-                subprocess.run(["python", local_file_name], check=True)
-    except subprocess.CalledProcessError as e:
-        print(colored('Erro ao executar o arquivo.', "red"), colored(' Entre em contato com o discord', 'yellow'), f'\n{str(e)}')
-      
+# atualizar/baixar o bot.py
+response = requests.get(boturl)
+if response.status_code == 200:
+    with open("bot.py", "w", encoding="utf-8") as file:
+        file.write(response.text)
 else:
-    raise DownloadError('Nao foi possivel fazer o Download do autocatch.', 21)
+    raise("deeu bom nao")
+
+
+# iniciar o autocatch
+if __name__ == "__main__":
+    subprocess.run(["python", "bot.py"], check=True)
