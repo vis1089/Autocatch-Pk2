@@ -110,7 +110,7 @@ Utpm = 0
 
 def Htime() -> int:
     global Utpm
-    if Utpm < 7:
+    if Utpm < 5:
         Utpm += 1
         return Utpm
     else:
@@ -257,3 +257,4 @@ except discord.HTTPException as e:
         """
         FlasK.terminate()
         """
+        
