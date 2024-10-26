@@ -1,8 +1,11 @@
 #bot.py url
 boturl = "https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py"
 
-import requests, subprocess
+bot_path = os.path.join(os.path.dirname(__file__), "bot.py")
 
+import requests, subprocess, os
+
+bot_path = os.path.join(os.path.dirname(__file__), "bot.py")
 
 # atualizar/baixar o bot.py
 response = requests.get(boturl)
