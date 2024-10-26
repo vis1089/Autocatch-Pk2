@@ -145,6 +145,7 @@ async def on_message(message : discord.Message):
                         num_pokemon += 1
                         split = content.split(' ')
                         pokemon = split[7].replace('!', '')
+                        pokemon = pokemon.split("<")[0]
                         if 'seem unusual...' in content:
                             shiny += 1
                             print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
