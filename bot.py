@@ -218,13 +218,11 @@ def ProcurarAtualizaçoes():
     time.sleep(60)
     while True:
         for file, url in Arquivos.items():
-            print(f'{requisicoes} - (GET)[{url}]')
             requisicoes += 1
             response = requests.get(url)
             if response.status_code == 200:
                 with open(file, 'w', encoding="utf-8") as arch:
                     arch.write(response.text)
-                    print(f'{file} Foi Recarregado.')
         time.sleep(600)
 
 
