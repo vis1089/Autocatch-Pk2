@@ -123,7 +123,7 @@ async def on_message(message : discord.Message):
                     embed_title = message.embeds[0].title
                     if 'wild pokémon has appeared!' in embed_title:
                         async with message.channel.typing():
-                            await asyncio.sleep(random.uniform(0.5, 1.4))
+                            await asyncio.sleep(1)
                             await message.channel.send(f'{Mpoketwo} h')
                 else:
                     content = message.content
@@ -159,7 +159,7 @@ async def on_message(message : discord.Message):
                             print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
                             print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
                         else:
-                            print(f'Total Pokémon Caught: {num_pokemon} :{pokemon}')
+                            print(f'Numero de Pokemons Pegos/Ultimo Pego: {num_pokemon} :{pokemon}')
                     elif 'human' in content:
                         paused, captcha = True, True
                         captcha_content = message.content
