@@ -1,8 +1,10 @@
-import discord, time, re, asyncio, random, requests
+import discord, time, re, asyncio, random, requests, sys
 from discord.ext import commands
 from termcolor import colored
 from unidecode import unidecode
 from threading import Thread
+
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 Arquivos = {
     'main.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/main.py', 'bot.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py', 'data/pokemon': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/pokemon', 'data/legendary': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/legendary', 'data/mythical': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/mythical'
