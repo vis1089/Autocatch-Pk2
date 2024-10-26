@@ -3,7 +3,7 @@
 ### How to use
 ###### Open the Terminal and digit
 ```bash
-git https://github.com/Kameil/Autocatch-Pk2.git autocatch
+git clone https://github.com/Kameil/Autocatch-Pk2.git autocatch
 ```
 ```bash
  cd autocatch
