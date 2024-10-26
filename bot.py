@@ -1,5 +1,4 @@
 import discord, time, re, asyncio, random, requests
-time, re, asyncio, random, requests
 from discord.ext import commands
 from termcolor import colored
 from unidecode import unidecode
