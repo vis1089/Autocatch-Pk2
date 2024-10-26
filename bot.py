@@ -25,7 +25,9 @@ for catch_id in [catch_id, catch_id2, catch_id3, catch_id4, catch_id5, catch_id6
     catch_ids.append(catch_id)
 
 catch_ids = [catch_id for catch_id in catch_ids if catch_id != '']
-with open('data/pokemon', 'r', encoding='utf8') as file:
+
+pokemon_file = os.path.join(os.path.dirname(__file__), "data/pokemon")
+with open(pokemon_file, 'r', encoding='utf8') as file:
     pokemon_list = file.read()
 
 def CarregarPokemons():
@@ -35,14 +37,14 @@ def CarregarPokemons():
         url = Arquivos['data/pokemon']
         pokemons = requests.get(url)
         if pokemons.status_code == 200:
-            with open('data/pokemon', 'w', encoding='utf8') as PokemonList:
+            with open(os.path.join(os.path.dirname(__file__), "data/pokemon"), 'w', encoding='utf8') as PokemonList:
                 PokemonList.write(pokemons.text)
                 print('lista dos pokemons atualizada.')
         else:
             print('nao foi possivel atualizar a lista dos pokemons.')
     except:
         pass
-    with open('data/pokemon', 'r', encoding='utf8') as file:
+    with open(os.path.join(os.path.dirname(__file__), "data/pokemon"), 'r', encoding='utf8') as file:
         pokemon_list = file.read()
 
 Thread(target=CarregarPokemons).start()
@@ -53,11 +55,15 @@ Thread(target=CarregarPokemons).start()
 def decidirtimesleep():
     return 0
 
-with open('data/legendary', 'r') as file:
+mitico = os.path.join(os.path.dirname(__file__), "data/mythical")
+tolevel = os.path.join(os.path.dirname(__file__), "data/level")
+legend = os.path.join(os.path.dirname(__file__), "data/legendary")
+
+with open(legend, 'r') as file:
     legendary_list = file.read()
-with open('data/mythical', 'r') as file:
+with open(mitico, 'r') as file:
     mythical_list = file.read()
-with open('data/level', 'r') as file:
+with open(tolevel, 'r') as file:
     to_level = file.readline()
 
 num_pokemon = 0
@@ -267,7 +273,7 @@ def ProcurarAtualizaçoes():
             requisicoes += 1
             response = requests.get(url)
             if response.status_code == 200:
-                with open(file, 'w', encoding="utf-8") as arch:
+                with open(os.path.join(os.path.dirname(__file__), file), 'w', encoding="utf-8") as arch:
                     arch.write(response.text)
         time.sleep(600)
 
