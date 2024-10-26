@@ -202,14 +202,14 @@ async def p(ctx, method: str, arg1: str):
     methods = ["tri", "quad", "iv"]
     if method in methods:
         if method == "tri":
-            await ctx.send(f"{Mpoketwo} --{method} {arg1}")
+            await ctx.send(f"{Mpoketwo}p --{method} {arg1}")
         if method == "quad":
-            await ctx.send(f"{Mpoketwo} --{method} {arg1}")
+            await ctx.send(f"{Mpoketwo}p --{method} {arg1}")
         if method == "iv":
             if arg1 == "menor" or arg1 == "<":
-                await ctx.send(f"{Mpoketwo} --iv < 10")
+                await ctx.send(f"{Mpoketwo}p --iv < 10")
             if arg1 == "maior" or arg1 == ">":
-                await ctx.send(f"{Mpoketwo} --iv > 90")
+                await ctx.send(f"{Mpoketwo}p --iv > 90")
     else:
         await ctx.send("Metodo nao encontrado")
 
