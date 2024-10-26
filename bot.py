@@ -8,7 +8,7 @@ Arquivos = {
     'main.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/main.py', 'bot.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py', 'data/pokemon': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/pokemon', 'data/legendary': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/legendary', 'data/mythical': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/mythical'
     }
 
-version = '2.9 info latest'
+version = '2.8 codigo otmizado'
 headers = {
     'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36'
 }
@@ -105,8 +105,18 @@ def remover_emojis(texto):
      return texto_sem_emojis 
   
 
- 
-         
+Utpm = 0 
+
+
+def Htime() -> int:
+    global Utpm
+    if Utpm < 7:
+        Utpm += 1
+        return Utpm
+    else:
+        Utpm = 0
+        return 0
+
 def remover_acentos(palavra):
     return unidecode(palavra)
   
@@ -126,7 +136,7 @@ async def on_message(message : discord.Message):
                     embed_title = message.embeds[0].title
                     if 'wild pokémon has appeared!' in embed_title:
                         async with message.channel.typing():
-                            await asyncio.sleep(1)
+                            await asyncio.sleep(Htime())
                             await message.channel.send(f'{Mpoketwo} h')
                 else:
                     content = message.content
