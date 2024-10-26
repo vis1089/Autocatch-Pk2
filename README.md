@@ -3,7 +3,7 @@
 ### How to use
 ###### Open the Terminal and digit
 ```bash
-https://github.com/Kameil/autocatch3chats-termux.git autocatch
+git https://github.com/Kameil/autocatch3chats-termux.git autocatch
 ```
 ```bash
  cd autocatch
