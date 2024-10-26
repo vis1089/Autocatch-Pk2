@@ -1,7 +1,6 @@
 #bot.py url
 boturl = "https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py"
 
-bot_path = os.path.join(os.path.dirname(__file__), "bot.py")
 
 import requests, subprocess, os
 
@@ -18,4 +17,4 @@ else:
 
 # iniciar o autocatch
 if __name__ == "__main__":
-    subprocess.run(["python", "bot.py"], check=True)
+    subprocess.run(["python", bot_path], check=True)
