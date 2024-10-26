@@ -217,6 +217,12 @@ async def p(ctx, method: str = None, arg1: str = None):
 
 
 @client.command()
+async def i(ctx, num = None):
+    if num is not None:
+        await ctx.send(f"{Mpoketwo}i {num}")
+    await ctx.send(f"{Mpoketwo} i l")
+
+@client.command()
 async def start(ctx):
     global paused
     async with ctx.typing():
