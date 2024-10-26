@@ -199,7 +199,7 @@ async def say(ctx, *, args):
 
 @client.command()
 async def p(ctx, method: str, arg1: str):
-    methods = []
+    methods = ["tri", "quad", "iv"]
     if method in methods:
         if method == "tri":
             await ctx.send(f"{Mpoketwo} --{method} {arg1}")
