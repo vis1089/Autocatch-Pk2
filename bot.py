@@ -198,9 +198,11 @@ async def say(ctx, *, args):
 """
 
 @client.command()
-async def p(ctx, method: str, arg1: str):
+async def p(ctx, method: str = None, arg1: str = None):
     methods = ["tri", "quad", "iv"]
-    if method in methods:
+    if method is None:
+        return await ctx.send(f"{Mpoketwo}p")
+    if method in methods and arg1 is not None:
         if method == "tri":
             await ctx.send(f"{Mpoketwo}p --{method} {arg1}")
         if method == "quad":
