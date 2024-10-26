@@ -106,8 +106,6 @@ def remover_emojis(texto):
   
 
 Utpm = 0 
-
-
 def Htime() -> int:
     global Utpm
     if Utpm < 5:
@@ -200,6 +198,23 @@ async def say(ctx, *, args):
 """
 
 @client.command()
+async def p(ctx, method: str, arg1: str):
+    methods = []
+    if method in methods:
+        if method == "tri":
+            await ctx.send(f"{Mpoketwo} --{method} {arg1}")
+        if method == "quad":
+            await ctx.send(f"{Mpoketwo} --{method} {arg1}")
+        if method == "iv":
+            if arg1 == "menor" or arg1 == "<":
+                await ctx.send(f"{Mpoketwo} --iv < 10")
+            if arg1 == "maior" or arg1 == ">":
+                await ctx.send(f"{Mpoketwo} --iv > 90")
+    else:
+        await ctx.send("Metodo nao encontrado")
+
+
+@client.command()
 async def start(ctx):
     global paused
     async with ctx.typing():
@@ -257,4 +272,3 @@ except discord.HTTPException as e:
         """
         FlasK.terminate()
         """
-        
