@@ -8,7 +8,7 @@ Arquivos = {
     'main.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/main.py', 'bot.py': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/bot.py', 'data/pokemon': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/pokemon', 'data/legendary': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/legendary', 'data/mythical': 'https://raw.githubusercontent.com/Kameil/autocatch3chats-termux/main/data/mythical'
     }
 
-version = '2.8 codigo otmizado'
+version = '2.9 info latest'
 headers = {
     'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Mobile Safari/537.36'
 }
@@ -79,7 +79,10 @@ def solve(message):
     solution = re.findall('^' + hint_replaced + '$', pokemon_list, re.MULTILINE)
     return solution
 
-
+async def Infolatest(message: discord.Message):
+    async with message.channel.typing():
+        await asyncio.sleep(random.uniform(0.5, 1.3))
+        await message.channel.send(f"{Mpoketwo} i l")
 paused = False
 
 @client.event
@@ -150,16 +153,24 @@ async def on_message(message : discord.Message):
                             shiny += 1
                             print(f'Shiny Pokémon caught! Pokémon: {pokemon}')
                             print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
+                            if not paused:
+                                await Infolatest(message)
                         elif re.findall('^' + pokemon + '$', legendary_list, re.MULTILINE):
                             legendary += 1
                             print(f'Legendary Pokémon caught! Pokémon: {pokemon}')
                             print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
+                            if not paused:
+                                await Infolatest(message)
                         elif re.findall('^' + pokemon + '$', mythical_list, re.MULTILINE):
                             mythical += 1
                             print(f'Mythical Pokémon caught! Pokémon: {pokemon}')
                             print(f'Shiny: {shiny} | Legendary: {legendary} | Mythical: {mythical}')
+                            if not paused:
+                                await Infolatest(message)
                         else:
                             print(f'Numero de Pokemons Pegos/Ultimo Pego: {num_pokemon} :{pokemon}')
+                            if random.randint(1, 10) == 10 and not paused:
+                                await Infolatest(message)
                     elif 'human' in content:
                         paused, captcha = True, True
                         captcha_content = message.content
